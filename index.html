@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angelenean Pokedex</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f2f2f2; }
+    .title { text-align: center; color: #d32f2f; margin-top: 20px; }
+    .home-container { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
+    .search-bar { margin-bottom: 20px; }
+    .btn { margin: 5px; padding: 10px 20px; background: #1976d2; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+    .btn:hover { background: #1565c0; }
+    .pokedex-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center; margin-top: 20px; }
+    .pokemon-img { width: 120px; height: 120px; object-fit: contain; }
+    .pokemon-name { font-size: 1.5em; color: #388e3c; margin: 10px 0; }
+    .pokemon-type { font-size: 1em; color: #555; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="title">Angelenean Pokedex</h1>
+  </header>
+
+  <main class="home-container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search Pokémon by name..." />
+      <button class="btn" onclick="searchPokemon()">Search</button>
+    </div>
+    <button onclick="location.href='pokemon.html'" class="btn">Show and Compare</button>
+
+    <div id="pokedexCard" class="pokedex-card" style="display:none;">
+      <img id="pokemonImg" class="pokemon-img" src="" alt="Pokemon Image" />
+      <div id="pokemonName" class="pokemon-name"></div>
+      <div id="pokemonType" class="pokemon-type"></div>
+    </div>
+  </main>
+
+  <script>
+    // Example Pokémon data
+    const pokedex = {
+      pikachu: {
+        name: "Pikachu",
+        type: "Electric",
+        img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
+      },
+      bulbasaur: {
+        name: "Bulbasaur",
+        type: "Grass/Poison",
+        img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+      },
+      charmander: {
+        name: "Charmander",
+        type: "Fire",
+        img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+      }
+      // Add more Pokémon as needed
+    };
+
+    function searchPokemon() {
+      const input = document.getElementById('searchInput').value.trim().toLowerCase();
+      const card = document.getElementById('pokedexCard');
+      if (pokedex[input]) {
+        document.getElementById('pokemonImg').src = pokedex[input].img;
+        document.getElementById('pokemonName').textContent = pokedex[input].name;
+        document.getElementById('pokemonType').textContent = "Type: " + pokedex[input].type;
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+        alert('Pokémon not found! Try Pikachu, Bulbasaur, or Charmander.');
+      }
+    }
+  </script>
+</body>
+</html>
